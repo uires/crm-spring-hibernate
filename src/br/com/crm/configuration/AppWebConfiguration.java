@@ -6,11 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import br.com.crm.controller.CustomerController;
 import br.com.crm.controller.HomeController;
+import br.com.crm.dao.CustomerDAO;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackageClasses = { HomeController.class })
+@ComponentScan(basePackageClasses = { HomeController.class, CustomerDAO.class, CustomerController.class })
 public class AppWebConfiguration {
 	@Bean
 	public InternalResourceViewResolver resolver() {
