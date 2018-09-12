@@ -3,62 +3,37 @@ package br.com.crm.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
+import javax.persistence.EntityManager;
 
-import br.com.crm.IF.IFGenericDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import br.com.crm.entity.Customer;
-import br.com.crm.factory.HibernateFactory;
 
 @Repository
-public class CustomerDAO implements IFGenericDAO<Customer> {
-	private Session session;
+@Transactional
+public class CustomerDAO {
+	@Autowired
+	private EntityManager manager;
 
-	@Override
-	public void save(Customer t) {
-		session = HibernateFactory.getSession();
-		session.beginTransaction();
-		session.save(t);
-		session.getTransaction().commit();
-		session.close();
+	public void save(Customer customer) {
+		manager.persist(customer);
 	}
 
-	@Override
-	public Customer selectById(Long id) {
-		session = HibernateFactory.getSession();
-		session.beginTransaction();
-		Customer customer = session.get(Customer.class, id);
-		session.getTransaction().commit();
-		session.close();
-		return customer;
-	}
-
-	@Override
-	public void update(Customer customer) {
-		session = HibernateFactory.getSession();
-		session.beginTransaction();
-		session.update(customer);
-		session.getTransaction().commit();
-		session.close();
-	}
-
-	@Override
 	public List<Customer> selectAll() {
-		session = HibernateFactory.getSession();
-		session.beginTransaction();
-		ArrayList<Customer> list = (ArrayList<Customer>) session.createQuery("FROM Customer").getResultList();
-		session.getTransaction().commit();
-		session.close();
-		return list;
+		return (ArrayList<Customer>) manager.createQuery("from Livro", Customer.class).getResultList();
 	}
 
-	@Override
-	public void delete(Long id) {
-		session = HibernateFactory.getSession();
-		session.beginTransaction();
-		session.delete(this.selectById(id));
-		session.getTransaction().commit();
-		session.close();
+	public Customer selectById(Long id) {
+		return manager.find(Customer.class, id);
 	}
 
+	public void udpdate(Customer customer) {
+		manager.persist(customer);
+	}
+	
+	public void remove(Customer customer) {
+		manager.remove(customer);
+	}
 }

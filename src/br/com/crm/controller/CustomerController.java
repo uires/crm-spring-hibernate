@@ -2,7 +2,6 @@ package br.com.crm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,11 +20,9 @@ public class CustomerController {
 		return new ModelAndView("edit").addObject("customer", dao.selectById(id));
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	@Transactional
+	@RequestMapping(value = "/delete")
 	public ModelAndView delete(@RequestParam("id") Long id) {
-		System.out.println(id);
-		dao.delete(id);
+		dao.remove(dao.selectById(id));
 		return new ModelAndView("redirect:/");
 	}
 }
