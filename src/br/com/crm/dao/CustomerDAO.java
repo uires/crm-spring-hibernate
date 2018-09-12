@@ -20,6 +20,7 @@ public class CustomerDAO implements IFGenericDAO<Customer> {
 		session.beginTransaction();
 		session.save(t);
 		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
@@ -28,6 +29,7 @@ public class CustomerDAO implements IFGenericDAO<Customer> {
 		session.beginTransaction();
 		Customer customer = session.get(Customer.class, id);
 		session.getTransaction().commit();
+		session.close();
 		return customer;
 	}
 
@@ -37,6 +39,7 @@ public class CustomerDAO implements IFGenericDAO<Customer> {
 		session.beginTransaction();
 		session.update(customer);
 		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
@@ -45,6 +48,7 @@ public class CustomerDAO implements IFGenericDAO<Customer> {
 		session.beginTransaction();
 		ArrayList<Customer> list = (ArrayList<Customer>) session.createQuery("FROM Customer").getResultList();
 		session.getTransaction().commit();
+		session.close();
 		return list;
 	}
 
@@ -54,6 +58,7 @@ public class CustomerDAO implements IFGenericDAO<Customer> {
 		session.beginTransaction();
 		session.delete(this.selectById(id));
 		session.getTransaction().commit();
+		session.close();
 	}
 
 }
