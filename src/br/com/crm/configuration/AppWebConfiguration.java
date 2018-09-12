@@ -6,9 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import br.com.crm.controller.HomeController;
+
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackageClasses = {})
+@ComponentScan(basePackageClasses = { HomeController.class })
 public class AppWebConfiguration {
 	@Bean
 	public InternalResourceViewResolver resolver() {
