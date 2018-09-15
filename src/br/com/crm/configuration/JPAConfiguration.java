@@ -24,7 +24,7 @@ public class JPAConfiguration {
 		containerEntityManagerFactoryBean.setJpaVendorAdapter(adapter);
 		
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/crm?useTimezone=true&amp;serverTimezone=UTC");
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/crm?useTimezone=true&serverTimezone=UTC");
 		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		driverManagerDataSource.setUsername("root");
 		driverManagerDataSource.setPassword("");
