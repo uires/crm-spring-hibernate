@@ -9,7 +9,7 @@
 </head>
 	<body>
 		<h4>CRM - Customer Relationship Manager</h4>
-		<a href="<c:url value="/add" />" >Add Customer</a>
+		<a href="<c:url value="/customer/addPage" />" >Add Customer</a>
 		<table>
 			<thead>
 				<tr>
@@ -28,7 +28,7 @@
 						<td>
 							<a href="<c:url value="/customer/delete" />?id=${iten.id}">Delete</a>
 							|
-							<a href="<c:url value="/customer/update" />?iten=${iten.id}">Update</a>
+							<a href="<c:url value="/customer/updatePage" />?id=${iten.id}">Update</a>
 						</td>
 					</tr>				
 				</c:forEach>

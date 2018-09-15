@@ -12,7 +12,7 @@ public class HomeController {
 	@Autowired
 	private CustomerDAO dao;
 
-	@RequestMapping(name = "/")
+	@RequestMapping(value = "/")
 	public ModelAndView home() {
 		return new ModelAndView("index").addObject("customerList", dao.selectAll());
 	}
