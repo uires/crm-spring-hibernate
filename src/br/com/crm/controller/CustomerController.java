@@ -16,6 +16,11 @@ public class CustomerController {
 	@Autowired
 	private CustomerDAO dao;
 
+	@RequestMapping("/index")
+	public ModelAndView home() {
+		return new ModelAndView("customer-action/index").addObject("customerList", dao.selectAll());
+	}
+
 	@RequestMapping("/addPage")
 	public ModelAndView addPage() {
 		return new ModelAndView("customer-action/add");
@@ -24,7 +29,7 @@ public class CustomerController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView add(Customer customer) {
 		dao.save(customer);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/index");
 	}
 
 	@RequestMapping(value = "/updatePage", method = RequestMethod.GET)
@@ -36,13 +41,13 @@ public class CustomerController {
 	public ModelAndView update(Customer customer) {
 		System.out.println(customer.toString());
 		dao.update(customer);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/index");
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam("id") Long id) {
 		dao.remove(id);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/index");
 	}
 
 }
